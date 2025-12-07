@@ -1,0 +1,154 @@
+def convert_distance(start_unit, end_unit, value):
+    start = start_unit.lower()
+    end = end_unit.lower()
+    if start == "in" and end == "ft":
+        return value / 12
+    elif start == "ft" and end == "in":
+        return value * 12
+    elif start == "in" and end == "cm":
+        return value * 2.54
+    elif start == "cm" and end == "in":
+        return value / 2.54
+    elif start == "ft" and end == "cm":
+        return value * 30.48
+    elif start == "cm" and end == "ft":
+        return value / 30.48
+    elif start == end:
+        return value
+    else:
+        return "Invalid"
+
+def convert_mass(start_unit, end_unit, value):
+    start = start_unit.lower()
+    end = end_unit.lower()
+    if start == "g" and end == "kg":
+        return value / 1000
+    elif start == "g" and end == "lb":
+        return value / 453.59237
+    elif start == "kg" and end == "g":
+        return value * 1000
+    elif start == "kg" and end == "lb":
+        return (value * 1000) / 453.59237
+    elif start == "lb" and end == "g":
+        return value * 453.59237
+    elif start == "lb" and end == "kg":
+        return (value * 453.59237) / 1000
+    elif start == end:
+        return value
+    else:
+        return "Invalid"
+
+def convert_volume(start_unit, end_unit, value):
+    start = start_unit.lower()
+    end = end_unit.lower()
+    if start == "l" and end == "ml":
+        return value * 1000
+    elif start == "ml" and end == "l":
+        return value / 1000
+    elif start == "l" and end == "m^3":
+        return value / 1000
+    elif start == "m^3" and end == "l":
+        return value * 1000
+    elif start == "ml" and end == "m^3":
+        return value / 1000000
+    elif start == "m^3" and end == "ml":
+        return value * 1000000
+    elif start == end:
+        return value
+    else:
+        return "Invalid"
+
+def convert_time(start_unit, end_unit, value):
+    start = start_unit.lower()
+    end = end_unit.lower()
+    if start == "s" and end == "min":
+        return value / 60
+    elif start == "min" and end == "s":
+        return value * 60
+    elif start == "min" and end == "h":
+        return value / 60
+    elif start == "h" and end == "min":
+        return value * 60
+    elif start == "s" and end == "h":
+        return value / 3600
+    elif start == "h" and end == "s":
+        return value * 3600
+    elif start == end:
+        return value
+    else:
+        return "Invalid"
+
+
+print("HELLO AND WELCOME TO THE UNIT CONVERTER")
+
+converter = True
+
+while converter:
+
+    open_function = input(
+        "I will need you to specify what type of units do you have (Distance, Time, Volume or Mass): "
+    ).lower()
+
+    while True:
+        try:
+            value = float(input("Give me the number that you have, it can be decimal: "))
+            break
+        except ValueError:
+            print("Please input a valid number")
+
+    if open_function == "distance":
+        start_unit = input("What unit do you have? (in, cm, ft): ").lower()
+        end_unit = input("What unit would you like to end with? (in, cm, ft): ").lower()
+        result = convert_distance(start_unit, end_unit, value)
+        if result == "Invalid":
+            print("Invalid units for distance conversion.")
+        else:
+            print(f"{result:.2f}")
+
+    elif open_function == "time":
+        start_unit = input("What unit do you have? (s, h, min): ").lower()
+        end_unit = input("What unit would you like to end with? (s, h, min): ").lower()
+        result = convert_time(start_unit, end_unit, value)
+        if result == "Invalid":
+            print("Invalid units for time conversion.")
+        else:
+            print(f"{result:.2f}")
+
+    elif open_function == "volume":
+        start_unit = input("What unit do you have? (L, mL, m^3): ").lower()
+        end_unit = input("What unit would you like to end with? (L, mL, m^3): ").lower()
+        result = convert_volume(start_unit, end_unit, value)
+        if result == "Invalid":
+            print("Invalid units for volume conversion.")
+        else:
+            print(f"{result:.2f}")
+
+    elif open_function == "mass":
+        start_unit = input("What unit do you have? (g, kg, lb): ").lower()
+        end_unit = input("What unit would you like to end with? (g, kg, lb): ").lower()
+        result = convert_mass(start_unit, end_unit, value)
+        if result == "Invalid":
+            print("Invalid units for mass conversion.")
+        else:
+            print(f"{result:.2f}")
+
+    else:
+        print("Invalid Input. Please try again")
+        continue 
+
+    again = input("Do you want to restart the converter? (yes/no): ").lower()
+
+    if again == "no":
+        converter = False
+        print("THANK YOU FOR VISITING THIS SITE")
+        while True:
+            try:
+                rating = int(input("Please give me a user rating from 1-5: "))
+                if 1 <= rating <= 5:
+                    print("Thanks for your rating!")
+                    break
+                else:
+                    print("Please take into account that the range is from 1 to 5")
+            except ValueError:
+                print("Invalid input. Please try again")
+
